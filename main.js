@@ -9,7 +9,10 @@ let score = Number(scoreDisplay.textContent);
 let time = Number(timeDisplay.textContent);
 let gameTime;
 let isPlaying = false;
-// let userName = prompt('Please enter username:');
+let user = document.querySelector('.username');
+// let userName = prompt('Please enter your name:');
+
+// user.textContent = userName;
 
 function getRandomTime(min, max) {
   return Math.round(Math.random() * (max - min) + min);
