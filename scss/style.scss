@@ -39,6 +39,15 @@ main {
           display: block;
         }
       }
+      .ally {
+        display: none;
+        height: 100%;
+        width: 100%;
+        &[data-active] {
+          background-color: blue;
+          display: block;
+        }
+      }
     }
     .holes:nth-child(3n + 2) {
       border-left: 3px solid rgba($color: #000000, $alpha: 0.6);
