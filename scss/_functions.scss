@@ -1,0 +1,16 @@
+@function rem($pixels, $context: 16) {
+  @return calc($pixels / $context) * 1rem;
+}
+
+@mixin display-flex($direction: row, $align: center, $justify: center) {
+  @if $direction != row {
+    flex-direction: $direction;
+  }
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin border($pixels: 1px, $alpha: 1, $color: #000, $style: solid) {
+  border: $pixels $style rgba($color: $color, $alpha: $alpha);
+}

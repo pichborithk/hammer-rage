@@ -1,0 +1,52 @@
+@use './functions' as *;
+
+html {
+  font-size: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main {
+  position: relative;
+  @include display-flex(column);
+  padding: 20%;
+  width: 100vw;
+  height: 100vh;
+  gap: 20px;
+  .display {
+    width: 500px;
+    @include display-flex(row, center, space-between);
+  }
+  .board {
+    min-height: 500px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @include border(3px, 0.6);
+    cursor: url('../hammer4.png'), auto;
+    .holes {
+      .mole {
+        display: none;
+        height: 100%;
+        width: 100%;
+        &[data-active] {
+          background-color: red;
+          display: block;
+        }
+      }
+    }
+    .holes:nth-child(3n + 2) {
+      border-left: 3px solid rgba($color: #000000, $alpha: 0.6);
+      border-right: 3px solid rgba($color: #000000, $alpha: 0.6);
+    }
+    .holes:nth-child(n + 4):nth-child(-n + 6) {
+      border-top: 3px solid rgba($color: #000000, $alpha: 0.6);
+      border-bottom: 3px solid rgba($color: #000000, $alpha: 0.6);
+    }
+  }
+}
