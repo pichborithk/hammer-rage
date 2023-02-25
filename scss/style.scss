@@ -11,16 +11,27 @@ html {
   list-style: none;
 }
 
+header {
+  width: 100vw;
+  text-align: center;
+}
+
 main {
   position: relative;
   @include display-flex(column);
-  padding: 20%;
+  padding: rem(50);
   width: 100vw;
-  height: 100vh;
   gap: 20px;
   .display {
     width: 500px;
     @include display-flex(row, center, space-between);
+    button {
+      font-size: rem(16);
+      height: rem(40);
+      font-weight: 600;
+      width: rem(80);
+      background-color: transparent;
+    }
   }
   .board {
     min-height: 500px;
@@ -28,24 +39,45 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     @include border(3px, 0.6);
-    cursor: url('../hammer4.png'), auto;
+    cursor: url('../image/hammer4.png'), auto;
     .holes {
+      overflow: hidden;
+      position: relative;
+      &:after {
+        display: block;
+        background: url(../image/dirt.svg) bottom center no-repeat;
+        background-size: contain;
+        content: '';
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        z-index: 5;
+        bottom: -20px;
+      }
       .mole {
-        display: none;
+        position: absolute;
         height: 100%;
         width: 100%;
+        transform: translateY(100%);
+        transition: all 0.4s ease-in-out;
+        z-index: -1;
         &[data-active] {
-          background-color: red;
-          display: block;
+          transform: translateY(0%);
+          transition: all 0.4s ease-in-out;
+          z-index: 2;
         }
       }
       .ally {
-        display: none;
+        position: absolute;
         height: 100%;
         width: 100%;
+        transform: translateY(100%);
+        transition: all 0.4s ease-in-out;
+        z-index: -1;
         &[data-active] {
-          background-color: blue;
-          display: block;
+          transform: translateY(0%);
+          transition: all 0.4s ease-in-out;
+          z-index: 2;
         }
       }
     }
