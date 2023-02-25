@@ -1,4 +1,6 @@
 const moles = document.querySelectorAll('.mole');
+const animals = document.querySelectorAll('.animals');
+const allies = document.querySelectorAll('.ally');
 const holes = document.querySelectorAll('.holes');
 const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
@@ -7,28 +9,29 @@ let score = Number(scoreDisplay.textContent);
 let time = Number(timeDisplay.textContent);
 let gameTime;
 let isPlaying = false;
+// let userName = prompt('Please enter username:');
 
 function getRandomTime(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-function getRandomIndex(holes) {
-  let randomIndex = Math.floor(Math.random() * holes.length);
+function getRandomIndex(animals) {
+  let randomIndex = Math.floor(Math.random() * animals.length);
   if (randomIndex === lastIndex) {
-    return getRandomIndex(holes);
+    return getRandomIndex(animals);
   }
   lastIndex = randomIndex;
 }
 
-function moleRetreat(index) {
-  delete moles[index].dataset.active;
+function retreat(index) {
+  delete animals[index].dataset.active;
 }
 
 function spawnRandomMole() {
-  getRandomIndex(holes);
-  moles[lastIndex].dataset.active = true;
+  getRandomIndex(animals);
+  animals[lastIndex].dataset.active = true;
   setTimeout(() => {
-    moleRetreat(lastIndex);
+    retreat(lastIndex);
     if (isPlaying) {
       console.log('still play');
       spawnRandomMole();
@@ -55,15 +58,18 @@ function startGame() {
   isPlaying = true;
 }
 
-function getHit(index) {
+function hitMole() {
   score++;
-  moleRetreat(index);
+  retreat(lastIndex);
   console.log('banged');
   scoreDisplay.textContent = score;
 }
 
-moles.forEach((mole, index) =>
-  mole.addEventListener('click', () => {
-    getHit(index);
-  })
-);
+function hitAlly() {
+  if (score <= 0) return;
+  score--;
+  scoreDisplay.textContent = score;
+}
+
+moles.forEach((mole) => mole.addEventListener('click', hitMole));
+allies.forEach((ally) => ally.addEventListener('click', hitAlly));
