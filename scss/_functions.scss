@@ -14,3 +14,12 @@
 @mixin border($pixels: 1px, $alpha: 1, $color: #000, $style: solid) {
   border: $pixels $style rgba($color: $color, $alpha: $alpha);
 }
+
+@mixin gradient-text($first-color, $second-color, $direction: left) {
+  background: -webkit-linear-gradient($direction, $first-color, $second-color);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
